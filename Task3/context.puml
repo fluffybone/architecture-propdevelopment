@@ -1,0 +1,49 @@
+@startuml container_diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+
+    !$COLOR_USER = "#64A0E6"
+   AddPersonTag("employee", $bgColor="#1B5DAA", $fontColor="white", $borderColor="#FF6347", $legendText="Сотрудники")
+   AddContainerTag("client_service", $bgColor="#64A0E6", $fontColor="white", $legendText="Сервисы для клиентов")
+   AddContainerTag("auth", $bgColor="#7B92BE", $fontColor="white", $legendText="Регистрация/Авторизация")
+   AddContainerTag("gos", $bgColor="#A28AA6", $fontColor="white", $legendText="")
+   AddContainerTag("external_system", $bgColor="#91A1B3", $fontColor="white", $legendText="")
+   UpdateElementStyle("external_person", $bgColor=$COLOR_USER)
+   
+   Person_Ext(client, "Клиент")
+   Person(user, "Собственник")
+   Person(employees, "Сотрудники", $tags="employee")
+   Person(employees_buh, "Бухгалтер", $tags="employee")
+  
+ 
+ System_Boundary(propDevelop, "PropDevelopment" ) {
+   System(auth, "Система авторизации", $tags='auth')
+   System(client_system, "Сервисы для продаж", $tags='client_service')
+   System(user_system, "Сервисы ЖКУ")
+   System(finance, "Финансы",'финансовый учёт')
+   System(data, "Дата",'группа сервисов, которые отвечают за обработку данных. Сюда входит хранилище, BI и отчётность.')
+   
+ }
+  System(gos, "Государственные регистрационные органы", $tags='gos')
+  System(pay_system, "Платежная система", $tags="external_system")
+  System(jkx_system, "Поставщик ресурсов ЖКХ", $tags="external_system")
+  System(smart_home_system, "Умный дом", $tags="external_system")
+ 
+  Rel(client,auth,"Авторизация/Регистрация / Аунтификация")
+  Rel(user,auth,"Авторизация/Регистрация / Аунтификация")
+  
+  Rel(auth,client_system,"Доступ к функционалу для клиентов")
+  Rel(auth,user_system,"Доступ к функционалу для собственников")
+  
+  Rel(gos,propDevelop,"Отвечают за регистрационные действия с объектами недвижимости")
+  Rel(employees,propDevelop,"работают с системой")
+  Rel(employees_buh,finance,"работает с финансами")
+  
+  Rel(user_system,jkx_system ,"работает с жкх")
+  Rel(user_system,pay_system ,"оплата")
+  Rel(user_system,smart_home_system ,"управление домом")
+  
+  Rel(client_system,data ,"синхронизация данных")
+  Rel(user_system,data ,"синхронизация данных")
+ 
+@enduml
