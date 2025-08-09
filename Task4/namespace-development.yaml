@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev
+  labels:
+    environment: dev
+    project: prop-development
+    owner: dev-manager-team
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: client-services
+  labels:
+    environment: client-services
+    project: prop-development-client
+    owner: dev-team
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: team-frontend
+  labels:
+    environment: dev
+    project: prop-development
+    owner: dev-team

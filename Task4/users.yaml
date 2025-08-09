@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: user1-devops
+  namespace: dev
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: polina-frontend
+  namespace: team-frontend
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: user2-security
+  namespace: client-services
